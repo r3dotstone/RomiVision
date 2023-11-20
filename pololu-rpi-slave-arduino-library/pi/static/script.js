@@ -24,19 +24,7 @@ function poll() {
 
 function update_status(json) {
   s = JSON.parse(json)
-  $("#button0").html(s["buttons"][0] ? '1' : '0')
-  $("#button1").html(s["buttons"][1] ? '1' : '0')
-  $("#button2").html(s["buttons"][2] ? '1' : '0')
 
-  $("#battery_millivolts").html(s["battery_millivolts"])
-
-  $("#analog0").html(s["analog"][0])
-  $("#analog1").html(s["analog"][1])
-  $("#analog2").html(s["analog"][2])
-  $("#analog3").html(s["analog"][3])
-  $("#analog4").html(s["analog"][4])
-  $("#analog5").html(s["analog"][5])
-  
   $("#encoders0").html(s["encoders"][0])
   $("#encoders1").html(s["encoders"][1])
 
