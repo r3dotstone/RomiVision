@@ -104,21 +104,3 @@ function setMotors(left, right) {
 function setMotorsDone() {
   block_set_motors = false
 }
-
-function setLeds() {
-  led0 = $('#led0')[0].checked ? 1 : 0
-  led1 = $('#led1')[0].checked ? 1 : 0
-  led2 = $('#led2')[0].checked ? 1 : 0
-  $.ajax({url: "leds/"+led0+","+led1+","+led2})
-}
-
-function playNotes() {
-  notes = $('#notes').val()
-  $.ajax({url: "play_notes/"+notes})
-}
-
-function shutdown() {
-  if (confirm("Really shut down the Raspberry Pi?"))
-    return true
-  return false
-}
