@@ -28,6 +28,9 @@ function update_status(json) {
   $("#encoders0").html(s["encoders"][0])
   $("#encoders1").html(s["encoders"][1])
 
+  $("#odometry0").html(s["odometry"][0])
+  $("#odometry1").html(s["odometry"][1])
+
   setTimeout(poll, 100)
 }
 

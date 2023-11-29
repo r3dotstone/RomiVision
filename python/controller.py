@@ -40,3 +40,5 @@ class Odometer:
         self.y  = self.y + self.u * np.sin(self.psi) * dt
         self.psi = self.psi + dt*self.psidot
         self.prev_t = t
+        self.enc_r_old = enc_r
+        self.enc_l_old = enc_l
