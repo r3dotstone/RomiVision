@@ -19,7 +19,7 @@ class Odometer:
         self.psidot = 0
         self.psi = 0
 
-        self.prev_t = 0
+        self.prev_t = time.time()
 
     def _updateQdots(self, enc_r, enc_l, dt):
         self.wr = (enc_r - self.enc_r_old) / dt / (120 * 12) * (2 * 3.1415)
@@ -32,7 +32,7 @@ class Odometer:
         self.psidot = (vr - vl) / (2 * r_romi)
 
     def updateOdometry(self, enc_r, enc_l):
-        t = time.process_time()
+        t = time.time()
         dt = t - self.prev_t
         self._updateQdots(enc_r, enc_l, dt)
         self._updateVelocities()
