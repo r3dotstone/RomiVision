@@ -36,7 +36,7 @@ class Odometer:
         dt = t - self.prev_t
         self._updateQdots(enc_r, enc_l, dt)
         self._updateVelocities()
-        self.x = self.x + self.u * np.cos(psi) * dt
-        self.y  = self.y + self.u * np.sin(psi) * dt
-        psi = psi + dt*self.psidot
+        self.x = self.x + self.u * np.cos(self.psi) * dt
+        self.y  = self.y + self.u * np.sin(self.psi) * dt
+        self.psi = self.psi + dt*self.psidot
         self.prev_t = t
