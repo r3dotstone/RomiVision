@@ -24,7 +24,7 @@ def status():
     odo.updateOdometry(encoders[0], encoders[1])
     data = {
         "encoders": encoders,
-        "odometry": [odo.prev_t, odo.u]
+        "odometry": [odo.wl, odo.wr]
     }
     return json.dumps(data)
 
