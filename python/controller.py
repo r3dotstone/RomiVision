@@ -28,7 +28,7 @@ class Odometer:
     def _updateVelocities(self):
         vl = self.wr*r_romi
         vr = self.wl*r_romi
-        U = (vl + vr) / 2
+        self.u = (vl + vr) / 2
         psidot = (vr - vl) / (2 * r_romi)
 
     def updateOdometry(self, enc_r, enc_l):
@@ -42,4 +42,3 @@ class Odometer:
         self.prev_t = t
         self.enc_r_old = enc_r
         self.enc_l_old = enc_l
-        print(self.x + ' ' + self.y)
