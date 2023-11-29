@@ -42,3 +42,4 @@ class Odometer:
         self.prev_t = t
         self.enc_r_old = enc_r
         self.enc_l_old = enc_l
+        print(self.x + ' ' + self.y)
