@@ -23,7 +23,7 @@ class Odometer:
 
     def _updateQdots(self, enc_r, enc_l, dt):
         self.wr = (enc_r - self.enc_r_old) / dt / (120 * 12) * (2 * 3.1415)
-        self.wl = (enc_l - self.enc_r_old) / dt / (120 * 12) * (2 * 3.1415)
+        self.wl = (enc_l - self.enc_l_old) / dt / (120 * 12) * (2 * 3.1415)
 
     def _updateVelocities(self):
         vl = self.wr*r_romi
