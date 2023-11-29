@@ -1,24 +1,15 @@
-# Copyright Pololu Corporation.  For more information, see https://www.pololu.com/
 import smbus
 import struct
 import time
 
+# i2c register for romi
 addr = 20
 
-class AStar:
+class Romi:
   def __init__(self):
     self.bus = smbus.SMBus(1)
 
   def read_unpack(self, address, size, format):
-    # Ideally we could do this:
-    #    byte_list = self.bus.read_i2c_block_data(20, address, size)
-    # But the AVR's TWI module can't handle a quick write->read transition,
-    # since the STOP interrupt will occasionally happen after the START
-    # condition, and the TWI module is disabled until the interrupt can
-    # be processed.
-    #
-    # A delay of 0.0001 (100 us) after each write is enough to account
-    # for the worst-case situation in our example code.
 
     self.bus.write_byte(addr, address)
     time.sleep(0.0001)
