@@ -11,6 +11,9 @@ romi = Romi()
 
 import json
 
+from controller import Odometer
+odo = Odometer()
+
 @app.route("/")
 def hello():
     return render_template("simple.html")
@@ -18,8 +21,10 @@ def hello():
 @app.route("/status.json")
 def status():
     encoders = romi.read_encoders()
+    odo.updateOdometry(encoders[0], encoders[1])
     data = {
-        "encoders": encoders
+        "encoders": encoders,
+        "odometry": [odo.x, odo.y]
     }
     return json.dumps(data)
 
