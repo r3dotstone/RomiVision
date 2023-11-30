@@ -8,8 +8,8 @@ odo = Odometer()
 
 start = time.time()
 
-romi.motors(100, 100)
 while (time.time() - start < 1):
+    romi.motors(100, 100)
     encoders = romi.read_encoders()
     odo.updateOdometry(encoders[0], encoders[1])
     print(odo.x + ", " + odo.y)
