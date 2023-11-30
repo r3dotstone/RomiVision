@@ -12,5 +12,5 @@ while (time.time() - start < 3):
     romi.motors(100, 100)
     encoders = romi.read_encoders()
     odo.updateOdometry(encoders[0], encoders[1])
-    print(odo.x, ", ", odo.y)
+    print(time.time() - start, odo.x, odo.y)
 romi.motors(0, 0)
