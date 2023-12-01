@@ -12,7 +12,8 @@ romi = Romi()
 import json
 
 from controller import Odometer
-odo = Odometer(romi.read_encoders())
+import time as time
+odo = Odometer(romi.read_encoders(), time.time())
 
 @app.route("/")
 def hello():
@@ -20,8 +21,9 @@ def hello():
 
 @app.route("/status.json")
 def status():
+    t = time.time()
     encoders = romi.read_encoders()
-    odo.updateOdometry(encoders[0], encoders[1])
+    odo.updateOdometry(encoders, t)
     data = {
         "encoders": encoders,
         "odometry": [odo.x, odo.y]
