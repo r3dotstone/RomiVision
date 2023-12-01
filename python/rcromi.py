@@ -12,7 +12,7 @@ romi = Romi()
 import json
 
 from controller import Odometer
-odo = Odometer()
+odo = Odometer(romi.read_encoders())
 
 @app.route("/")
 def hello():

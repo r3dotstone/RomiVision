@@ -4,7 +4,7 @@ from romi_interface.romi import Romi
 romi = Romi()
 
 from controller import Odometer
-odo = Odometer()
+odo = Odometer(romi.read_encoders())
 
 start = time.time()
 

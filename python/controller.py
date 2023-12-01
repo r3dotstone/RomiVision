@@ -5,9 +5,9 @@ r_romi = .07438
 r_wheel = .035
 
 class Odometer:
-    def __init__(self):
-        self.enc_l_old = 0
-        self.enc_r_old = 0
+    def __init__(self, encoders):
+        self.enc_l_old = encoders[0]
+        self.enc_r_old = encoders[1]
 
         self.wl = 0
         self.wr = 0
@@ -22,7 +22,7 @@ class Odometer:
         self.prev_t = time.time()
 
     def _updateQdots(self, enc_r, enc_l, dt):
-        self.wr = (enc_r - self.enc_r_old) / dt / (120 * 12) * (2 * 3.1415)
+        self.wr = -(enc_r - self.enc_r_old) / dt / (120 * 12) * (2 * 3.1415)
         self.wl = (enc_l - self.enc_l_old) / dt / (120 * 12) * (2 * 3.1415)
 
     def _updateVelocities(self):
