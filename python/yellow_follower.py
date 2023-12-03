@@ -35,10 +35,12 @@ while (True):
     contours, _ = cv2.findContours(image_threshed_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
     
     # iterate through contours
+    i = 0
     for contour in contours: 
   
     # here we are ignoring first counter because  
     # findcontour function detects whole image as shape 
+    
         if i == 0: 
             i = 1
             continue
