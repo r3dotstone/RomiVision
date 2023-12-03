@@ -27,26 +27,84 @@ while (True):
     #create a mask of pixels in this range
     mask = cv2.inRange(hsv,lower_bound,upper_bound)
     #now we use mask to threshold our image!
-    thresh = cv2.bitwise_and(image,image,mask=mask)
+    image_threshed = cv2.bitwise_and(image,image,mask=mask)
     #now convert to grayscale for centroid calc
-    grey = cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY)
-    #now find centroid! Use the moments function
-    M = cv2.moments(mask)
-    #to find the centroid...
-    if(M["m00"] != 0):
-        cX = int(M["m10"]/M["m00"])
-        cY = int(M["m01"]/M["m00"])
-    else:
-        cX, cY = 0, 0
+    image_threshed_grey = cv2.cvtColor(image_threshed,cv2.COLOR_BGR2GRAY)
 
-    e = int((cX - cWidth/2) * 150 / cWidth*2)
+    #Find contours
+    contours, _ = cv2.findContours(image_threshed_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+    
+    # iterate through contours
+    for contour in contours: 
+  
+    # here we are ignoring first counter because  
+    # findcontour function detects whole image as shape 
+        if i == 0: 
+            i = 1
+            continue
+    
+        # cv2.approxPloyDP() function to approximate the shape 
+        polys = cv2.approxPolyDP( 
+            contour, 0.01 * cv2.arcLength(contour, True), True) 
+        
+        # using drawContours() function 
+        #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
 
-    lCmd = np.clip(150 + e, -255, 255)
-    rCmd = np.clip(150 - e, -255, 255)
+        # finding center point of shape 
+        M = cv2.moments(contour) 
+        if M['m00'] != 0.0: 
+            x = int(M['m10']/M['m00']) 
+            y = int(M['m01']/M['m00']) 
+    
+        # putting shape name at center of each shape 
+        # if len(polys) == 3: 
+        #     cv2.putText(img, 'Triangle', (x, y), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+    
+        elif len(polys) == 4:
+            square = True
+            cv2.putText(image, 'Yellow square!', (x, y), 
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+    
+        # elif len(polys) == 5: 
+        #     cv2.putText(img, 'Pentagon', (x, y), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+    
+        # elif len(polys) == 6: 
+        #     cv2.putText(img, 'Hexagon', (x, y), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+    
+        # else: 
+        #     cv2.putText(img, 'circle', (x, y), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+        else:
+            square = False
 
-    if (cX == cY == 0):
-        lCmd = -100
-        rCmd = 100
+        if square:
+            #now find centroid! Use the moments function
+            M = cv2.moments(mask)
+            #to find the centroid...
+            if(M["m00"] != 0):
+                cX = int(M["m10"]/M["m00"])
+                cY = int(M["m01"]/M["m00"])
+            else:
+                cX, cY = 0, 0
+
+            # calculate and scale error
+            e = int((cX - cWidth/2) * 150 / cWidth*2)
+
+            # contrained motor commands
+            lCmd = np.clip(150 + e, -255, 255)
+            rCmd = np.clip(150 - e, -255, 255)
+
+            # if conting can be found, spin around and look 
+            if (cX == cY == 0):
+                lCmd = -100
+                rCmd = 100
+
+    # dislay image feed
+    cv2.imshow("camera",image)
+    cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
