@@ -14,13 +14,13 @@ picam2.start()
 
 while (True):
     image = picam2.capture_array("main")
-
+    
     #image = np.frombuffer(cameraData, np.uint8).reshape((cHeight, cWidth, 4))
     #convert to HSV
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
     #Threshold GREEEN STUFFFFFFF
-    lower_bound = np.array([50,50,50])
-    upper_bound = np.array([70,255,255])
+    lower_bound = np.array([20,0,0])
+    upper_bound = np.array([90,255,255])
     #create a mask of pixels in this range
     mask = cv2.inRange(hsv,lower_bound,upper_bound)
     #now we use mask to threshold our image!
