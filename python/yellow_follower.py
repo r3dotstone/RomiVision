@@ -41,7 +41,7 @@ while (True):
 
     e = int((cX - cWidth/2) * 150 / cWidth*2)
 
-    lCmd = np.clip(150 + e, 0, 255)
-    rCmd = np.clip(150 - e, 0, 255)
+    lCmd = np.clip(150 + e, -255, 255)
+    rCmd = np.clip(150 - e, -255, 255)
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
