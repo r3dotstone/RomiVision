@@ -24,6 +24,8 @@ params.filterByCircularity = True
 params.minCircularity = 0.6
 params.maxCircularity = 0.85
 
+
+
 detector = cv2.SimpleBlobDetector_create(params)
 
 while (True):
@@ -47,10 +49,14 @@ while (True):
     rCmd = 0
     lCmd = 0
     e = 0
+    l = 500
     for kp in keypoints:
-        e = int((kp.pt[0] - cWidth/2) * 150 / cWidth*2)
-        lCmd = np.clip(150 + e, -255, 255)
-        rCmd = np.clip(150 - e, -255, 255)
+        tl = abs(kp.pt[0] - cX) + abs(kp.pt[1] - cY)
+        if tl < l:
+            l = tl
+            e = int((kp.pt[0] - cWidth/2) * 150 / cWidth*2)
+            lCmd = np.clip(150 + e, -255, 255)
+            rCmd = np.clip(150 - e, -255, 255)
     if (len(keypoints) > 0):
         print(lCmd, rCmd, e, keypoints[0].pt[0], keypoints[0].pt[1])
     #romi.motors(lCmd, rCmd)
@@ -58,6 +64,7 @@ while (True):
     cv2.circle(grey,(cX,cY),5,(0,0,255),-1)
     cv2.putText(grey,"centroid",(cX-25,cY-25),
     cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
-    
+    blank = np.zeros((1, 1))  
+    blobs = cv2.drawKeypoints(grey, keypoints, blank, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)  
     cv2.imshow("camera",grey)
     cv2.waitKey(1)
