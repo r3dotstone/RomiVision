@@ -49,7 +49,7 @@ while (True):
         cY = int(M["m01"]/M["m00"])
     else:
         cX, cY = 0, 0
-        
+    
     keypoints = detector.detect(grey)
 
     rCmd = 0
@@ -62,3 +62,14 @@ while (True):
 
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
+
+    #add a label to original image!!
+    cv2.circle(image,(cX,cY),5,(0,0,255),-1)
+    cv2.putText(image,"centroid",(cX-25,cY-25),
+    cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
+    blank = np.zeros((1, 1))  
+    cv2.drawKeypoints(image, keypoints, blank, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS) 
+
+    #display camera Image
+    cv2.imshow("camera",image)
+    cv2.waitKey(1)
