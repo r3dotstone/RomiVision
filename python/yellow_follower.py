@@ -22,8 +22,8 @@ while (True):
     #convert to HSV
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
     #Threshold GREEEN STUFFFFFFF
-    lower_bound = np.array([20,0,0])
-    upper_bound = np.array([70,255,255])
+    lower_bound = np.array([20,190,60])
+    upper_bound = np.array([60,255,255])
     #create a mask of pixels in this range
     mask = cv2.inRange(hsv,lower_bound,upper_bound)
     #now we use mask to threshold our image!
@@ -68,7 +68,7 @@ while (True):
     
         elif len(polys) == 4:
             square = True
-            cv2.putText(image, 'Yellow square!', (x, y), 
+            cv2.putText(image_threshed_grey, 'Yellow square!', (x, y), 
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
     
         # elif len(polys) == 5: 
