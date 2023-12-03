@@ -1,16 +1,15 @@
 import cv2
 import numpy as np
-from picamera2 import Picamera2, Preview
+from picamera2 import Picamera2
 import time
 
 cHeight = 1080
 cWidth = 1920
 
 picam2 = Picamera2()
-config = picam2.create_preview_configuration()
-picam2.configure(config)
+#config = picam2.create_preview_configuration()
+#picam2.configure(config)
 
-picam2.start_preview(Preview.QTGL)
 picam2.start()
 
 while (True):
@@ -38,7 +37,6 @@ while (True):
         cX, cY = 0, 0
     #add a label to original image!!
     cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-    cv2.circle(image,(320, 450),5,(0,0,255),-1)
     cv2.putText(image,"centroid",(cX-25,cY-25),
     cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
