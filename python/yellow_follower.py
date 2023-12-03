@@ -107,6 +107,9 @@ while (True):
             if (cX == cY == 0):
                 lCmd = -100
                 rCmd = 100
+        else:
+            lCmd = -30
+            rCmd = 30
 
     # dislay image feed
     cv2.imshow("camera",image_threshed_grey)
