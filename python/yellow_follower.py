@@ -41,6 +41,6 @@ while (True):
 
     e = (cX - cWidth/2) * 255 / cWidth*2
 
-    lCmd = np.constrain(255 + e, 255)
-    rCmd = np.constrain(255 - e, 255)
+    lCmd = np.clip(255 + e, 0, 255)
+    rCmd = np.clip(255 - e, 0, 255)
     romi.motors(lCmd, rCmd)
