@@ -16,3 +16,6 @@ thresh = 2e5
 plt.plot(histr)
 print(histr)
 plt.show()
+plt.savefig('testHistr.png')
+
+#TEST

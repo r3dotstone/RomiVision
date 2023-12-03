@@ -15,6 +15,18 @@ from controller import Odometer
 import time as time
 odo = Odometer(romi.read_encoders(), time.time())
 
+#from picamera2 import Picamera2, Preview
+#from matplotlib import pyplot as plt
+#import time
+
+#picam2 = Picamera2()
+#config = picam2.create_preview_configuration()
+#picam2.configure(config)
+
+#picam2.start_preview(Preview.QTGL)
+#picam2.start()
+
+
 @app.route("/")
 def hello():
     return render_template("simple.html")
