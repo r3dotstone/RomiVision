@@ -109,4 +109,4 @@ while (True):
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
-    romi.motors(lCmd, rCmd)
+#    romi.motors(lCmd, rCmd)
