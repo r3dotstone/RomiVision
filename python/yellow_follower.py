@@ -15,17 +15,6 @@ picam2.configure(config)
 
 picam2.start()
 
-params = cv2.SimpleBlobDetector_Params() 
-
-params.filterByArea = True
-params.minArea = 10
-  
-params.filterByCircularity = True 
-params.minCircularity = 0.6
-#params.maxCircularity = 0.85
-
-detector = cv2.SimpleBlobDetector_create(params)
-
 while (True):
     image = picam2.capture_array("main")
 
@@ -50,26 +39,9 @@ while (True):
     else:
         cX, cY = 0, 0
     
-    keypoints = detector.detect(grey)
-
-    rCmd = 0
-    lCmd = 0
-    e = 0
-    for kp in keypoints:
-        e = int((cX - cWidth/2) * 150 / cWidth*2)
-        lCmd = np.clip(150 + e, -255, 255)
-        rCmd = np.clip(150 - e, -255, 255)
+    e = int((cX - cWidth/2) * 150 / cWidth*2)
+    lCmd = np.clip(150 + e, -255, 255)
+    rCmd = np.clip(150 - e, -255, 255)
 
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
-
-    #add a label to original image!!
-    cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-    cv2.putText(image,"centroid",(cX-25,cY-25),
-    cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
-    blank = np.zeros((1, 1))  
-    cv2.drawKeypoints(image, keypoints, blank, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS) 
-
-    #display camera Image
-    cv2.imshow("camera",image)
-    cv2.waitKey(1)
