@@ -56,14 +56,9 @@ while (True):
     lCmd = 0
     e = 0
     for kp in keypoints:
-        if abs(kp.pt[0] - cX) < 1/10*cWidth:
-            e = int((cX - cWidth/2) * 150 / cWidth*2)
-
-            lCmd = np.clip(150 + e, -255, 255)
-            rCmd = np.clip(150 - e, -255, 255)
-        else:
-            lCmd = -100
-            rCmd = 100
+        e = int((cX - cWidth/2) * 150 / cWidth*2)
+        lCmd = np.clip(150 + e, -255, 255)
+        rCmd = np.clip(150 - e, -255, 255)
 
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
