@@ -15,8 +15,21 @@ picam2.configure(config)
 
 picam2.start()
 
+params = cv2.SimpleBlobDetector_Params() 
+
+params.filterByArea = True
+params.minArea = 100
+  
+params.filterByCircularity = True 
+params.minCircularity = 0.70
+params.maxCircularity = 0.85
+
+detector = cv2.SimpleBlobDetector_create(params)
+
 while (True):
     image = picam2.capture_array("main")
+
+    keypoints = detector.detect(image)
     
     #image = np.frombuffer(cameraData, np.uint8).reshape((cHeight, cWidth, 4))
     #convert to HSV
@@ -39,14 +52,15 @@ while (True):
     else:
         cX, cY = 0, 0
 
-    e = int((cX - cWidth/2) * 150 / cWidth*2)
+    for kp in keypoints:
+        if abs(kp.x - Cx) < 1/10*cWidth:
+            e = int((cX - cWidth/2) * 150 / cWidth*2)
 
-    lCmd = np.clip(150 + e, -255, 255)
-    rCmd = np.clip(150 - e, -255, 255)
-
-    if (cX == cY == 0):
-        lCmd = -100
-        rCmd = 100
+            lCmd = np.clip(150 + e, -255, 255)
+            rCmd = np.clip(150 - e, -255, 255)
+        else:
+            lCmd = -100
+            rCmd = 100
 
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
