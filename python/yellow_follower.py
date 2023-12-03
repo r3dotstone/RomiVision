@@ -54,6 +54,7 @@ while (True):
 
     rCmd = 0
     lCmd = 0
+    e = 0
     for kp in keypoints:
         if abs(kp.x - Cx) < 1/10*cWidth:
             e = int((cX - cWidth/2) * 150 / cWidth*2)
