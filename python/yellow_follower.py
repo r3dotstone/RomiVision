@@ -53,7 +53,7 @@ while (True):
         rCmd = np.clip(150 - e, -255, 255)
 
     print(lCmd, rCmd, e, keypoints[0].pt[0], keypoints[0].pt[1])
-    romi.motors(lCmd, rCmd)
+    #romi.motors(lCmd, rCmd)
 
     cv2.circle(image,(cX,cY),5,(0,0,255),-1)
     cv2.putText(image,"centroid",(cX-25,cY-25),
