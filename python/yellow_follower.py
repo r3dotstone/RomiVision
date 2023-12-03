@@ -105,8 +105,8 @@ while (True):
                 rCmd = 100
 
     # dislay image feed
-    cv2.imshow("camera",image)
+    cv2.imshow("camera",image_threshed_grey)
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
-#    romi.motors(lCmd, rCmd)
+    # romi.motors(lCmd, rCmd)
