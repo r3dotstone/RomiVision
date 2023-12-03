@@ -18,7 +18,7 @@ picam2.start()
 params = cv2.SimpleBlobDetector_Params() 
 
 params.filterByArea = True
-params.minArea = 100
+params.minArea = 10
   
 params.filterByCircularity = True 
 params.minCircularity = 0.6
