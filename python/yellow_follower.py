@@ -30,7 +30,7 @@ while (True):
     image = picam2.capture_array("main")
 
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
-    lower_bound = np.array([20,0,0])
+    lower_bound = np.array([20,190,60])
     upper_bound = np.array([70,255,255])
     mask = cv2.inRange(hsv,lower_bound,upper_bound)
     thresh = cv2.bitwise_and(image,image,mask=mask)
@@ -55,9 +55,9 @@ while (True):
     print(lCmd, rCmd, e, keypoints[0].pt[0], keypoints[0].pt[1])
     #romi.motors(lCmd, rCmd)
 
-    cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-    cv2.putText(image,"centroid",(cX-25,cY-25),
+    cv2.circle(grey,(cX,cY),5,(0,0,255),-1)
+    cv2.putText(grey,"centroid",(cX-25,cY-25),
     cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
     
-    cv2.imshow("camera",image)
+    cv2.imshow("camera",grey)
     cv2.waitKey(1)
