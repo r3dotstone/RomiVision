@@ -56,7 +56,7 @@ while (True):
     lCmd = 0
     e = 0
     for kp in keypoints:
-        if abs(kp.pt.x - cX) < 1/10*cWidth:
+        if abs(kp.pt[0] - cX) < 1/10*cWidth:
             e = int((cX - cWidth/2) * 150 / cWidth*2)
 
             lCmd = np.clip(150 + e, -255, 255)
