@@ -51,8 +51,8 @@ while (True):
         e = int((kp.pt[0] - cWidth/2) * 150 / cWidth*2)
         lCmd = np.clip(150 + e, -255, 255)
         rCmd = np.clip(150 - e, -255, 255)
-
-    print(lCmd, rCmd, e, keypoints[0].pt[0], keypoints[0].pt[1])
+    if (len(keypoints) > 0):
+        print(lCmd, rCmd, e, keypoints[0].pt[0], keypoints[0].pt[1])
     #romi.motors(lCmd, rCmd)
 
     cv2.circle(grey,(cX,cY),5,(0,0,255),-1)
