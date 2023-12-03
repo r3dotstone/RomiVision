@@ -110,6 +110,7 @@ while (True):
         else:
             lCmd = -30
             rCmd = 30
+            e = "No Squares Detected"
 
     # dislay image feed
     cv2.imshow("camera",image_threshed_grey)
