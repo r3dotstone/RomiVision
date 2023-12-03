@@ -29,8 +29,6 @@ detector = cv2.SimpleBlobDetector_create(params)
 while (True):
     image = picam2.capture_array("main")
 
-    keypoints = detector.detect(image)
-    
     #image = np.frombuffer(cameraData, np.uint8).reshape((cHeight, cWidth, 4))
     #convert to HSV
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
@@ -51,6 +49,8 @@ while (True):
         cY = int(M["m01"]/M["m00"])
     else:
         cX, cY = 0, 0
+        
+    keypoints = detector.detect(grey)
 
     rCmd = 0
     lCmd = 0
