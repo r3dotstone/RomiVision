@@ -14,8 +14,7 @@ picam2.start_preview(Preview.QTGL)
 picam2.start()
 
 while (True):
-    image = np.empty((cHeight * cWidth * 3,), dtype=np.uint8)
-    picam2.capture(image, 'bgr')
+    image = picam2.capture_array("main")
 
     #image = np.frombuffer(cameraData, np.uint8).reshape((cHeight, cWidth, 4))
     #convert to HSV
