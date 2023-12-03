@@ -43,5 +43,10 @@ while (True):
 
     lCmd = np.clip(150 + e, -255, 255)
     rCmd = np.clip(150 - e, -255, 255)
+
+    if (cX == cY == 0):
+        lCmd = -100
+        rCmd = 100
+
     print(lCmd, rCmd, e)
     romi.motors(lCmd, rCmd)
