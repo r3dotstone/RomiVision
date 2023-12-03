@@ -46,7 +46,7 @@ while (True):
             i = 1
             continue
     
-        if cv2.contourArea(contour) < 2500:
+        if cv2.contourArea(contour) < 250:
             continue
 
         # cv2.approxPloyDP() function to approximate the shape 
