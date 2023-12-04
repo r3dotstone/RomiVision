@@ -70,7 +70,7 @@ while (True):
     image_dilate = cv2.dilate(image_edges, dilatationKernal, iterations = 1) 
 
     #Find contours
-    contours, _ = cv2.findContours(image_dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+    contours, _ = cv2.findContours(image_dilate, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
     
     # iterate through contours
     i = 0
