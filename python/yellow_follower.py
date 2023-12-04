@@ -15,10 +15,36 @@ picam2.configure(config)
 
 picam2.start()
 
+# Parameter Window
+cv2.namedWindow("Parameters")
+cv2.resizeWindow("Parameters",640,240)
+cv2.createTrackbar("Canny 1", "Parameters", 150, 255, empty)
+cv2.createTrackbar("Canny 2", "Parameters", 255, 255, empty)
+cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
+cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
+cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
+
 while (True):
+
+    canny1 = cv2.getTrackbarPos("Canny1", "Parameters")
+    canny2 = cv2.getTrackbarPos("Canny2", "Parameters")
+    hue = cv2.getTrackbarPos("Hue", "Parameters")
+    sat = cv2.getTrackbarPos("Saturation", "Parameters")
+    val = cv2.getTrackbarPos("Value", "Parameters")
+
+    # capture
     image = picam2.capture_array("main")
+    # blur
+    image_blur = cv2.GaussianBlur(image, (7, 7), 1)
+    # greyscale
+    image_grey = cv2.cvtColor(image_blur,cv2.COLOR_BGR2GRAY)
+    # edge find
+    image_edges = cv2.Canny(image_grey,canny1,canny2)
     
-    #image = np.frombuffer(cameraData, np.uint8).reshape((cHeight, cWidth, 4))
+
+
+
+
     #convert to HSV
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
     #Threshold GREEEN STUFFFFFFF
@@ -113,7 +139,7 @@ while (True):
             e = "No Squares Detected"
 
     # dislay image feed
-    cv2.imshow("camera",image_threshed_grey)
+    cv2.imshow("camera",image_edges)
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
