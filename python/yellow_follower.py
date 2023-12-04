@@ -31,6 +31,7 @@ while (True):
 
     canny1 = cv2.getTrackbarPos("Canny 1", "Parameters")
     canny2 = cv2.getTrackbarPos("Canny 2", "Parameters")
+    area = cv2.getTrackbarPos("Area Threshold", "Parameters")
     hue = cv2.getTrackbarPos("Hue", "Parameters")
     sat = cv2.getTrackbarPos("Saturation", "Parameters")
     val = cv2.getTrackbarPos("Value", "Parameters")
@@ -42,11 +43,6 @@ while (True):
     image_blur = cv2.GaussianBlur(image, (7, 7), 1)
     # greyscale
     image_grey = cv2.cvtColor(image_blur,cv2.COLOR_BGR2GRAY)
-    # edge find
-    image_edges = cv2.Canny(image_grey,canny1,canny2)
-    # dilate
-    dilatationKernal = np.ones((5,5))
-    image_dilate = cv2.dilate(image_edges, dilatationKernal, iterations = 1)    
 
 
 
@@ -62,6 +58,13 @@ while (True):
     image_threshed = cv2.bitwise_and(image,image,mask=mask)
     #now convert to grayscale for centroid calc
     image_threshed_grey = cv2.cvtColor(image_threshed,cv2.COLOR_BGR2GRAY)
+
+    # edge find
+    image_edges = cv2.Canny(image_threshed_grey,canny1,canny2)
+    
+    # dilate
+    dilatationKernal = np.ones((5,5))
+    image_dilate = cv2.dilate(image_edges, dilatationKernal, iterations = 1) 
 
     #Find contours
     contours, _ = cv2.findContours(image_dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
@@ -79,7 +82,7 @@ while (True):
             continue
     
         # skip it if smaller than 2500 pixels^2
-        if cv2.contourArea(contour) < 2500:
+        if cv2.contourArea(contour) < area:
             continue
 
         cv2.drawContours(image_contours, contour, -1, (255, 0, 255), 7)
