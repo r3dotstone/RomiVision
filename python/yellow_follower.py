@@ -61,7 +61,7 @@ while (True):
 
     # edge find
     image_edges = cv2.Canny(image_threshed_grey,canny1,canny2)
-    
+
     # dilate
     dilatationKernal = np.ones((5,5))
     image_dilate = cv2.dilate(image_edges, dilatationKernal, iterations = 1) 
@@ -151,7 +151,7 @@ while (True):
             e = "No Squares Detected"
 
     # dislay image feed
-    cv2.imshow("camera",image_dilate)
+    # cv2.imshow("camera",image_dilate)
     cv2.imshow("camera",image_contours)
     cv2.waitKey(1)
 
