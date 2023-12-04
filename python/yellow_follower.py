@@ -44,7 +44,7 @@ while (True):
     image_edges = cv2.Canny(image_grey,canny1,canny2)
     # dilate
     dilatationKernal = np.ones((5,5))
-    image_dilate = cv2.dilate(image_edges, dilatationKernal, instations = 1)    
+    image_dilate = cv2.dilate(image_edges, dilatationKernal, iterations = 1)    
 
 
 
