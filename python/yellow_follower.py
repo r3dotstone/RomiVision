@@ -149,7 +149,7 @@ while (True):
         triangle = False
         print("no square :(, # of vertices = ",len(polys))
 
-    if square:
+    if square or triangle:
         #now find centroid! Use the moments function
         # M = cv2.moments(polys)
         # #to find the centroid...
