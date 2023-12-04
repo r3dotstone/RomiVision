@@ -141,14 +141,14 @@ while (True):
         #now find centroid! Use the moments function
         M = cv2.moments(polys)
         #to find the centroid...
-        if(M["m00"] != 0):
-            cX = int(M["m10"]/M["m00"])
-            cY = int(M["m01"]/M["m00"])
-            cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-            cv2.putText(image,"yellow square!",(cX-25,cY-25),
-            cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
-        else:
-            cX, cY = 0, 0
+        # if(M["m00"] != 0):
+        cX = int(M["m10"]/M["m00"])
+        cY = int(M["m01"]/M["m00"])
+        cv2.circle(image,(cX,cY),5,(0,0,255),-1)
+        cv2.putText(image,"yellow square!",(cX-25,cY-25),
+        cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
+        # else:
+            # cX, cY = 0, 0
 
         # calculate and scale error
         e = int((cX - cWidth/2) * 150 / cWidth*2)
