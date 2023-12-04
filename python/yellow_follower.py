@@ -22,7 +22,7 @@ cv2.namedWindow("Parameters")
 cv2.resizeWindow("Parameters",640,240)
 cv2.createTrackbar("Canny 1", "Parameters", 52, 255, empty)
 cv2.createTrackbar("Canny 2", "Parameters", 96, 255, empty)
-cv2.createTrackbar("Area Threshold", "Parameters", 0, 10000, empty)
+cv2.createTrackbar("Area Threshold", "Parameters", 2500, 10000, empty)
 cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
@@ -88,13 +88,14 @@ while (True):
         if cv2.contourArea(contour) < area:
             continue
 
-        cv2.drawContours(image_contours, contour, -1, (255, 0, 255), 7)
-        print(len(contour))
 
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
             contour, eps/100 * cv2.arcLength(contour, True), True) 
         
+        cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7)
+        print(len(polys))
+
         # using drawContours() function 
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
 
