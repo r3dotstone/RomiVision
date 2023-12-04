@@ -76,7 +76,7 @@ while (True):
     polys = []
     square = False
     triangle = False
-    
+
     if triangle == True:
         sign = -1
     else:
@@ -170,7 +170,7 @@ while (True):
         cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
         # calculate and scale error
-        k = 50
+        k = 65
         e = int((cX - cWidth/2) * k / cWidth*2)
 
         # contrained motor commands
