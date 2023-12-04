@@ -96,7 +96,8 @@ while (True):
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
             contour, eps/10000 * cv2.arcLength(contour, True), True) 
-        
+        print("verticies = ",polys)
+
         cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7, cv2.LINE_AA)
 
         # using drawContours() function 
@@ -139,16 +140,18 @@ while (True):
 
     if square:
         #now find centroid! Use the moments function
-        M = cv2.moments(contours)
-        #to find the centroid...
-        if(M["m00"] != 0):
-            cX = int(M["m10"]/M["m00"])
-            cY = int(M["m01"]/M["m00"])
-            cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-            cv2.putText(image,"yellow square!",(cX-25,cY-25),
-            cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
-        else:
-            cX, cY = 0, 0
+        # M = cv2.moments(polys)
+        # #to find the centroid...
+        # if(M["m00"] != 0):
+        #     cX = int(M["m10"]/M["m00"])
+        #     cY = int(M["m01"]/M["m00"])
+        #     cv2.circle(image,(cX,cY),5,(0,0,255),-1)
+        #     cv2.putText(image,"yellow square!",(cX-25,cY-25),
+        #     cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
+        # else:
+        #     cX, cY = 0, 0
+        cX = np.average(polys[:,0])
+        cY = np.average(polys[:,1])
 
         # calculate and scale error
         e = int((cX - cWidth/2) * 150 / cWidth*2)
