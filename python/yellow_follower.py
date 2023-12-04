@@ -37,7 +37,6 @@ while (True):
     sat = cv2.getTrackbarPos("Saturation", "Parameters")
     val = cv2.getTrackbarPos("Value", "Parameters")
     eps = cv2.getTrackbarPos("Epsilon", "Parameters")
-    print(eps)
 
     # capture
     image = picam2.capture_array("main")
@@ -94,7 +93,6 @@ while (True):
             contour, eps/10000 * cv2.arcLength(contour, True), True) 
         
         cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7, cv2.LINE_AA)
-        print(len(polys))
 
         # using drawContours() function 
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
@@ -129,8 +127,10 @@ while (True):
         
         if len(polys) == 4:
             square = True
+            print("square!")
         else:
             square = False
+            print("no square :(, # of vertices = ",len(polys))
 
         if square:
             #now find centroid! Use the moments function
@@ -160,7 +160,7 @@ while (True):
         else:
             lCmd = -30
             rCmd = 30
-            e = "No Squares Detected"
+            e = "no error"
 
     # dislay image feed
     # cv2.imshow("camera",image_dilate)
