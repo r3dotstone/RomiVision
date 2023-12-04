@@ -179,8 +179,8 @@ while (True):
         #     rCmd = 100
 
     else:
-        lCmd = -30
-        rCmd = 30
+        lCmd = 0
+        rCmd = 0
         e = "inf"
 
     # dislay image feed
