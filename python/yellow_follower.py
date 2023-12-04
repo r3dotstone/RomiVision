@@ -75,6 +75,11 @@ while (True):
     i = 0
     polys = []
     square = False
+    triangle = False
+    if triangle == False:
+        sign = -1
+    else:
+        sign = 1
     lCmd = 0
     rCmd = 0
     e = "init"
@@ -134,6 +139,9 @@ while (True):
     if len(polys) == 4:
         square = True
         print("square!")
+    if len(polys) == 3:
+        triangle = True
+        print("triangle!")
     else:
         square = False
         print("no square :(, # of vertices = ",len(polys))
@@ -181,4 +189,4 @@ while (True):
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e,)
-    # romi.motors(lCmd, rCmd)
+    romi.motors(sign * lCmd, sign * rCmd)
