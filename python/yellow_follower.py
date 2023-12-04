@@ -166,7 +166,7 @@ while (True):
         print("centroid = ",cX,cY)
 
         cv2.circle(image_contours,(cX,cY),5,(0,0,255),-1)
-        cv2.putText(image_contours,"yellow square!",(cX-25,cY-25),
+        cv2.putText(image_contours,"centroid!",(cX-25,cY-25),
         cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
         # calculate and scale error
@@ -174,9 +174,12 @@ while (True):
         e = int((cX - cWidth/2) * k / cWidth*2)
 
         # contrained motor commands
-        lCmd = np.clip(k + e, -255, 255)
-        rCmd = np.clip(k - e, -255, 255)
-
+        if square:
+            lCmd = np.clip(k + e, -255, 255)
+            rCmd = np.clip(k - e, -255, 255)
+        elif triangle:
+            rCmd = np.clip(-(k + e), -255, 255)
+            lCmd = np.clip(-(k - e), -255, 255)
         # # if conting can be found, spin around and look 
         # if (cX == cY == 0):
         #     lCmd = -100
@@ -193,4 +196,4 @@ while (True):
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e,)
-    romi.motors(sign * lCmd, sign * rCmd)
+    romi.motors(lCmd, rCmd)
