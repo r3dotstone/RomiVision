@@ -150,12 +150,12 @@ while (True):
         #     cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
         # else:
         #     cX, cY = 0, 0
-        cX = np.average(polys[:,:,0])
-        cY = np.average(polys[:,:,1])
+        cX = int(np.average(polys[:,:,0]))
+        cY = int(np.average(polys[:,:,1]))
         print("centroid = ",cX,cY)
 
-        cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-        cv2.putText(image,"yellow square!",(cX-25,cY-25),
+        cv2.circle(image_contours,(cX,cY),5,(0,0,255),-1)
+        cv2.putText(image_contours,"yellow square!",(cX-25,cY-25),
         cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
         # calculate and scale error
