@@ -139,11 +139,12 @@ while (True):
     if len(polys) == 4:
         square = True
         print("square!")
-    if len(polys) == 3:
+    elif len(polys) == 3:
         triangle = True
         print("triangle!")
     else:
         square = False
+        triangle = False
         print("no square :(, # of vertices = ",len(polys))
 
     if square:
