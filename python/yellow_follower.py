@@ -91,7 +91,7 @@ while (True):
         
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
-            contour, eps/100 * cv2.arcLength(contour, True), True) 
+            contour, 1 * cv2.arcLength(contour, True), True) 
         
         # using drawContours() function 
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
