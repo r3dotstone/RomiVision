@@ -28,8 +28,8 @@ cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
 
 while (True):
 
-    canny1 = cv2.getTrackbarPos("Canny1", "Parameters")
-    canny2 = cv2.getTrackbarPos("Canny2", "Parameters")
+    canny1 = cv2.getTrackbarPos("Canny 1", "Parameters")
+    canny2 = cv2.getTrackbarPos("Canny 2", "Parameters")
     hue = cv2.getTrackbarPos("Hue", "Parameters")
     sat = cv2.getTrackbarPos("Saturation", "Parameters")
     val = cv2.getTrackbarPos("Value", "Parameters")
