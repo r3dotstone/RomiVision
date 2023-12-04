@@ -26,7 +26,7 @@ cv2.createTrackbar("Area Threshold", "Parameters", 2500, 10000, empty)
 cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
-cv2.createTrackbar("Epsilon", "Parameters", 1, 100, empty)
+cv2.createTrackbar("Epsilon", "Parameters", 1, 10000, empty)
 
 while (True):
 
@@ -91,7 +91,7 @@ while (True):
 
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
-            contour, eps/100 * cv2.arcLength(contour, True), True) 
+            contour, eps/10000 * cv2.arcLength(contour, True), True) 
         
         cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7)
         print(len(polys))
