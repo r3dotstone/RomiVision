@@ -168,7 +168,7 @@ while (True):
         cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
         # calculate and scale error
-        k = 20
+        k = 50
         e = int((cX - cWidth/2) * k / cWidth*2)
 
         # contrained motor commands
