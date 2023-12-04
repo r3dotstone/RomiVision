@@ -100,10 +100,10 @@ while (True):
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
 
         # finding center point of shape 
-        M = cv2.moments(contour) 
-        if M['m00'] != 0.0: 
-            x = int(M['m10']/M['m00']) 
-            y = int(M['m01']/M['m00']) 
+        mContour = cv2.moments(contour) 
+        if mContour['m00'] != 0.0: 
+            x = int(mContour['m10']/mContour['m00']) 
+            y = int(mContour['m01']/mContour['m00']) 
     
         # putting shape name at center of each shape 
         # if len(polys) == 3: 
@@ -136,6 +136,9 @@ while (True):
             if(M["m00"] != 0):
                 cX = int(M["m10"]/M["m00"])
                 cY = int(M["m01"]/M["m00"])
+                cv2.circle(image,(cX,cY),5,(0,0,255),-1)
+                cv2.putText(image,"centroid",(cX-25,cY-25),
+                cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
             else:
                 cX, cY = 0, 0
 
