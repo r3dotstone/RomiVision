@@ -167,11 +167,12 @@ while (True):
         cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
         # calculate and scale error
-        e = int((cX - cWidth/2) * 150 / cWidth*2)
+        k = 20
+        e = int((cX - cWidth/2) * k / cWidth*2)
 
         # contrained motor commands
-        lCmd = np.clip(150 + e, -255, 255)
-        rCmd = np.clip(150 - e, -255, 255)
+        lCmd = np.clip(k + e, -255, 255)
+        rCmd = np.clip(k - e, -255, 255)
 
         # # if conting can be found, spin around and look 
         # if (cX == cY == 0):
