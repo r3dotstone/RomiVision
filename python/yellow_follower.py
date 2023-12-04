@@ -77,7 +77,7 @@ while (True):
     lCmd = 0
     rCmd = 0
     e = "init"
-    
+
     for contour in contours: 
   
     # here we are ignoring first counter because  
@@ -129,42 +129,42 @@ while (True):
         #     cv2.putText(img, 'circle', (x, y), 
         #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
         
-        if len(polys) == 4:
-            square = True
-            print("square!")
+    if len(polys) == 4:
+        square = True
+        print("square!")
+    else:
+        square = False
+        print("no square :(, # of vertices = ",len(polys))
+
+    if square:
+        #now find centroid! Use the moments function
+        M = cv2.moments(polys)
+        #to find the centroid...
+        if(M["m00"] != 0):
+            cX = int(M["m10"]/M["m00"])
+            cY = int(M["m01"]/M["m00"])
+            cv2.circle(image,(cX,cY),5,(0,0,255),-1)
+            cv2.putText(image,"yellow square!",(cX-25,cY-25),
+            cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
         else:
-            square = False
-            print("no square :(, # of vertices = ",len(polys))
+            cX, cY = 0, 0
 
-        if square:
-            #now find centroid! Use the moments function
-            M = cv2.moments(polys)
-            #to find the centroid...
-            if(M["m00"] != 0):
-                cX = int(M["m10"]/M["m00"])
-                cY = int(M["m01"]/M["m00"])
-                cv2.circle(image,(cX,cY),5,(0,0,255),-1)
-                cv2.putText(image,"yellow square!",(cX-25,cY-25),
-                cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
-            else:
-                cX, cY = 0, 0
+        # calculate and scale error
+        e = int((cX - cWidth/2) * 150 / cWidth*2)
 
-            # calculate and scale error
-            e = int((cX - cWidth/2) * 150 / cWidth*2)
+        # contrained motor commands
+        lCmd = np.clip(150 + e, -255, 255)
+        rCmd = np.clip(150 - e, -255, 255)
 
-            # contrained motor commands
-            lCmd = np.clip(150 + e, -255, 255)
-            rCmd = np.clip(150 - e, -255, 255)
+        # # if conting can be found, spin around and look 
+        # if (cX == cY == 0):
+        #     lCmd = -100
+        #     rCmd = 100
 
-            # # if conting can be found, spin around and look 
-            # if (cX == cY == 0):
-            #     lCmd = -100
-            #     rCmd = 100
-
-        else:
-            lCmd = -30
-            rCmd = 30
-            e = "no error"
+    else:
+        lCmd = -30
+        rCmd = 30
+        e = "inf"
 
     # dislay image feed
     # cv2.imshow("camera",image_dilate)
