@@ -16,6 +16,8 @@ picam2.configure(config)
 picam2.start()
 
 # Parameter Window
+def empty(x):
+    pass
 cv2.namedWindow("Parameters")
 cv2.resizeWindow("Parameters",640,240)
 cv2.createTrackbar("Canny 1", "Parameters", 150, 255, empty)
