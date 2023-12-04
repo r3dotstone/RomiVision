@@ -74,6 +74,10 @@ while (True):
     # iterate through contours
     i = 0
     square = False
+    lCmd = 0
+    rCmd = 0
+    e = "init"
+    
     for contour in contours: 
   
     # here we are ignoring first counter because  
