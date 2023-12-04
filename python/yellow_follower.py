@@ -37,6 +37,7 @@ while (True):
     sat = cv2.getTrackbarPos("Saturation", "Parameters")
     val = cv2.getTrackbarPos("Value", "Parameters")
     eps = cv2.getTrackbarPos("Epsilon", "Parameters")
+    print(eps)
 
     # capture
     image = picam2.capture_array("main")
@@ -88,10 +89,11 @@ while (True):
             continue
 
         cv2.drawContours(image_contours, contour, -1, (255, 0, 255), 7)
-        
+        print(len(contour))
+
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
-            contour, 1 * cv2.arcLength(contour, True), True) 
+            contour, eps/100 * cv2.arcLength(contour, True), True) 
         
         # using drawContours() function 
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
@@ -157,5 +159,5 @@ while (True):
     cv2.imshow("camera",image_contours)
     cv2.waitKey(1)
 
-    print(lCmd, rCmd, e)
+    print(lCmd, rCmd, e,)
     # romi.motors(lCmd, rCmd)
