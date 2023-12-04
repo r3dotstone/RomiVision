@@ -36,6 +36,7 @@ while (True):
 
     # capture
     image = picam2.capture_array("main")
+    image_contours = image.copy()
     # blur
     image_blur = cv2.GaussianBlur(image, (7, 7), 1)
     # greyscale
@@ -63,6 +64,7 @@ while (True):
 
     #Find contours
     contours, _ = cv2.findContours(image_threshed_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+    cv2.drawContours(image_contours, contours, -1, (255, 0, 255), 7)
     
     # iterate through contours
     i = 0
@@ -144,6 +146,7 @@ while (True):
 
     # dislay image feed
     cv2.imshow("camera",image_dilate)
+    cv2.imshow("camera",image_contours)
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
