@@ -73,7 +73,7 @@ while (True):
     
     # iterate through contours
     i = 0
-    polys = 0
+    polys = []
     square = False
     lCmd = 0
     rCmd = 0
