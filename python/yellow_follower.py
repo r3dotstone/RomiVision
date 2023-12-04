@@ -76,10 +76,12 @@ while (True):
     polys = []
     square = False
     triangle = False
-    if triangle == False:
+    
+    if triangle == True:
         sign = -1
     else:
         sign = 1
+
     lCmd = 0
     rCmd = 0
     e = "init"
