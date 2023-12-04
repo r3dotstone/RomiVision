@@ -26,7 +26,7 @@ cv2.createTrackbar("Area Threshold", "Parameters", 2500, 10000, empty)
 cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
-cv2.createTrackbar("Epsilon", "Parameters", 1, 10000, empty)
+cv2.createTrackbar("Epsilon", "Parameters", 464, 10000, empty)
 
 while (True):
 
@@ -100,20 +100,20 @@ while (True):
         #cv2.drawContours(img, [contour], 0, (0, 0, 255), 5) 
 
         # finding center point of shape 
-        mContour = cv2.moments(contour) 
-        if mContour['m00'] != 0.0: 
-            x = int(mContour['m10']/mContour['m00']) 
-            y = int(mContour['m01']/mContour['m00']) 
+        # mContour = cv2.moments(contour) 
+        # if mContour['m00'] != 0.0: 
+        #     x = int(mContour['m10']/mContour['m00']) 
+        #     y = int(mContour['m01']/mContour['m00']) 
     
         # putting shape name at center of each shape 
         # if len(polys) == 3: 
         #     cv2.putText(img, 'Triangle', (x, y), 
         #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
     
-        elif len(polys) == 4:
-            square = True
-            cv2.putText(image_threshed_grey, 'Yellow square!', (x, y), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+        # elif len(polys) == 4:
+        #     square = True
+        #     cv2.putText(image_threshed_grey, 'Yellow square!', (x, y), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
     
         # elif len(polys) == 5: 
         #     cv2.putText(img, 'Pentagon', (x, y), 
@@ -126,6 +126,9 @@ while (True):
         # else: 
         #     cv2.putText(img, 'circle', (x, y), 
         #                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+        
+        if len(polys) == 4:
+            square = True
         else:
             square = False
 
@@ -149,10 +152,11 @@ while (True):
             lCmd = np.clip(150 + e, -255, 255)
             rCmd = np.clip(150 - e, -255, 255)
 
-            # if conting can be found, spin around and look 
-            if (cX == cY == 0):
-                lCmd = -100
-                rCmd = 100
+            # # if conting can be found, spin around and look 
+            # if (cX == cY == 0):
+            #     lCmd = -100
+            #     rCmd = 100
+
         else:
             lCmd = -30
             rCmd = 30
