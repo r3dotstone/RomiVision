@@ -93,7 +93,7 @@ while (True):
         polys = cv2.approxPolyDP( 
             contour, eps/10000 * cv2.arcLength(contour, True), True) 
         
-        cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7)
+        cv2.drawContours(image_contours, polys, -1, (255, 0, 255), 7, cv2.LINE_AA)
         print(len(polys))
 
         # using drawContours() function 
