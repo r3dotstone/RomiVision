@@ -20,8 +20,8 @@ def empty(x):
     pass
 cv2.namedWindow("Parameters")
 cv2.resizeWindow("Parameters",640,240)
-cv2.createTrackbar("Canny 1", "Parameters", 150, 255, empty)
-cv2.createTrackbar("Canny 2", "Parameters", 255, 255, empty)
+cv2.createTrackbar("Canny 1", "Parameters", 52, 255, empty)
+cv2.createTrackbar("Canny 2", "Parameters", 96, 255, empty)
 cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
@@ -42,7 +42,9 @@ while (True):
     image_grey = cv2.cvtColor(image_blur,cv2.COLOR_BGR2GRAY)
     # edge find
     image_edges = cv2.Canny(image_grey,canny1,canny2)
-    
+    # dilate
+    dilatationKernal = np.ones((5,5))
+    image_dilate = cv2.dilate(image_edges, dilatationKernal, instations = 1)    
 
 
 
@@ -141,7 +143,7 @@ while (True):
             e = "No Squares Detected"
 
     # dislay image feed
-    cv2.imshow("camera",image_edges)
+    cv2.imshow("camera",image_dilate)
     cv2.waitKey(1)
 
     print(lCmd, rCmd, e)
