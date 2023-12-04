@@ -22,6 +22,7 @@ cv2.namedWindow("Parameters")
 cv2.resizeWindow("Parameters",640,240)
 cv2.createTrackbar("Canny 1", "Parameters", 52, 255, empty)
 cv2.createTrackbar("Canny 2", "Parameters", 96, 255, empty)
+cv2.createTrackbar("Area Threshold", "Parameters", 0, 10000, empty)
 cv2.createTrackbar("Hue", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Saturation", "Parameters", 255, 255, empty)
 cv2.createTrackbar("Value", "Parameters", 255, 255, empty)
@@ -63,8 +64,7 @@ while (True):
     image_threshed_grey = cv2.cvtColor(image_threshed,cv2.COLOR_BGR2GRAY)
 
     #Find contours
-    contours, _ = cv2.findContours(image_threshed_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
-    cv2.drawContours(image_contours, contours, -1, (255, 0, 255), 7)
+    contours, _ = cv2.findContours(image_dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
     
     # iterate through contours
     i = 0
@@ -78,9 +78,12 @@ while (True):
             i = 1
             continue
     
-        if cv2.contourArea(contour) < 250:
+        # skip it if smaller than 2500 pixels^2
+        if cv2.contourArea(contour) < 2500:
             continue
 
+        cv2.drawContours(image_contours, contour, -1, (255, 0, 255), 7)
+        
         # cv2.approxPloyDP() function to approximate the shape 
         polys = cv2.approxPolyDP( 
             contour, 0.01 * cv2.arcLength(contour, True), True) 
